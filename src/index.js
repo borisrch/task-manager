@@ -21,27 +21,26 @@ app.post('/users', async (req, res) => {
   }
 });
 
-app.get('/users/:id', (req, res) => {
+app.get('/users/:id', async (req, res) => {
   const _id = req.params.id;
 
-  User.findById(_id).then((user) => {
+  try {
+    const user = await User.findById(_id);
     if (!user) {
       return res.status(404).send();
     }
-
-    res.send(user);
-    
-  }).catch((error) => {
-      return res.status(500).send();
-  });
+    res.status(200).send(user);
+  } catch (e) {
+      res.status(500).send(e);
+  }
 });
 
-app.get('/users', (req, res) => {
-  User.find({}).then((users) => {
-    res.send(users);
-  }).catch((error) => {
-
-  });
+app.get('/users', async (req, res) => {
+  try {
+    const users = await Users.find({});
+  } catch (e) {
+    res.status(500).send();
+  }
 });
 
 app.post('/tasks', (req, res) => {
