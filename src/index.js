@@ -10,6 +10,11 @@ const taskRouter = require('./routers/task');
 const app = express();
 const port = process.env.PORT || 3000;
 
+
+// app.use((req, res, next) => {
+//   res.status(503).send('Site is under maintenance. Check back later.');
+// });
+
 // automatically parse requests as json
 app.use(express.json());
 
