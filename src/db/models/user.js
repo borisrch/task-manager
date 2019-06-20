@@ -49,7 +49,9 @@ const userSchema = new mongoose.Schema({
       required: true
     }
   }]
-})
+}, {
+    timestamps: true
+});
 
 // localField: _id which is defined from this schema.
 // foreignField: the attribute on the ref: schema which links to localField
