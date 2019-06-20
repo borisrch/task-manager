@@ -49,6 +49,14 @@ const userSchema = new mongoose.Schema({
   }]
 })
 
+// localField: _id which is defined from this schema.
+// foreignField: the attribute on the ref: schema which links to localField
+userSchema.virtual('tasks', {
+  ref: 'Task',
+  localField: '_id',
+  foreignField: 'owner'
+})
+
 // (Instance) methods are accessible on the instances of the model.
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
